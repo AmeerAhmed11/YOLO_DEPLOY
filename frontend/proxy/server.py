@@ -24,8 +24,8 @@ if not os.path.exists(static_dir):
 
 app.mount("/static", StaticFiles(directory=static_dir), name="static")
 
-# Backend inference server URL (Compute Engine)
-BACKEND_URL = os.getenv("BACKEND_URL", "http://34.31.71.152:8080")
+# Backend inference server URL (Modal)
+BACKEND_URL = os.getenv("BACKEND_URL", "https://amee14r--yolo-inference-fastapi-app.modal.run")
 
 logger.info(f"Backend inference server: {BACKEND_URL}")
 

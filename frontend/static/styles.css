@@ -1,0 +1,351 @@
+:root {
+    /* Color Palette */
+    --bg-dark: hsl(222, 47%, 11%);
+    --bg-card: hsla(222, 47%, 15%, 0.7);
+    --border-color: hsla(217, 33%, 25%, 0.5);
+    
+    --text-main: #F8FAFC;
+    --text-muted: #94A3B8;
+    
+    --accent-blue: #3B82F6;
+    --accent-purple: #8B5CF6;
+    
+    /* Class Colors */
+    --color-accident: #EF4444; /* Red */
+    --color-bus: #F59E0B;      /* Amber */
+    --color-car: #3B82F6;      /* Blue */
+    --color-truck: #10B981;    /* Green */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    min-height: 100vh;
+    background-image: 
+        radial-gradient(circle at 15% 50%, hsla(245, 80%, 60%, 0.1), transparent 25%),
+        radial-gradient(circle at 85% 30%, hsla(210, 100%, 56%, 0.1), transparent 25%);
+    background-attachment: fixed;
+}
+
+/* Typography */
+h1 { font-size: 1.5rem; font-weight: 700; }
+h1 span { font-weight: 400; color: var(--text-muted); }
+h2 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; }
+h3 { font-size: 1rem; font-weight: 500; margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-muted); }
+.subtitle { font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+.text-gradient {
+    background: linear-gradient(to right, var(--accent-blue), var(--accent-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+}
+
+/* Layout */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.layout-grid {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 2rem;
+}
+
+@media (max-width: 900px) {
+    .layout-grid { grid-template-columns: 1fr; }
+}
+
+/* Glassmorphism Components */
+.glass-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: hsla(222, 47%, 11%, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.logo-icon {
+    color: var(--accent-blue);
+}
+
+.glass-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.full-height {
+    height: calc(100vh - 140px);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Status Indicator */
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+.status-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+}
+.status-dot.connected { background-color: #10B981; box-shadow: 0 0 8px #10B981; }
+.status-dot.disconnected { background-color: #EF4444; box-shadow: 0 0 8px #EF4444; }
+
+/* Drop Zone */
+.drop-zone {
+    border: 2px dashed var(--border-color);
+    border-radius: 12px;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: hsla(222, 47%, 15%, 0.3);
+}
+.drop-zone:hover, .drop-zone.dragover {
+    border-color: var(--accent-blue);
+    background: hsla(217, 100%, 60%, 0.05);
+}
+.upload-icon {
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+}
+.drop-zone:hover .upload-icon {
+    transform: translateY(-5px);
+    color: var(--accent-blue);
+}
+
+/* Controls */
+.settings-group {
+    margin: 1.5rem 0;
+}
+.settings-group label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+input[type=range] {
+    width: 100%;
+    accent-color: var(--accent-blue);
+}
+
+.primary-btn, .secondary-btn {
+    width: 100%;
+    padding: 0.875rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+    margin-bottom: 1rem;
+}
+
+.primary-btn {
+    background: linear-gradient(to right, var(--accent-blue), var(--accent-purple));
+    color: white;
+}
+.primary-btn:hover:not(:disabled) {
+    box-shadow: 0 0 15px hsla(245, 80%, 60%, 0.4);
+}
+.primary-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.secondary-btn {
+    background: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+}
+.secondary-btn:hover {
+    background: hsla(222, 47%, 20%, 1);
+}
+
+.spinner {
+    display: none;
+    width: 20px; height: 20px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Stats */
+.stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+.stat-box {
+    background: hsla(222, 47%, 10%, 0.5);
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid hsla(217, 33%, 25%, 0.3);
+}
+.stat-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+.stat-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.class-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+.chip {
+    padding: 0.25rem 0.75rem;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: hsla(222, 47%, 20%, 0.8);
+    border: 1px solid transparent;
+}
+.chip .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+}
+.chip-accident { border-color: hsla(0, 84%, 60%, 0.3); color: var(--color-accident); }
+.chip-accident .dot { background-color: var(--color-accident); }
+
+.chip-bus { border-color: hsla(38, 92%, 50%, 0.3); color: var(--color-bus); }
+.chip-bus .dot { background-color: var(--color-bus); }
+
+.chip-car { border-color: hsla(217, 91%, 60%, 0.3); color: var(--color-car); }
+.chip-car .dot { background-color: var(--color-car); }
+
+.chip-truck { border-color: hsla(160, 84%, 39%, 0.3); color: var(--color-truck); }
+.chip-truck .dot { background-color: var(--color-truck); }
+
+/* Preview & Canvas */
+.preview-container {
+    position: relative;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: hsla(222, 47%, 8%, 0.5);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#image-preview, #video-preview {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+#result-canvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none; /* Let clicks pass through to video controls */
+}
+
+.empty-state {
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Video Progress */
+.progress-overlay {
+    position: absolute;
+    inset: 0;
+    background: hsla(222, 47%, 11%, 0.8);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+.progress-box {
+    background: var(--bg-card);
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    width: 300px;
+    border: 1px solid var(--border-color);
+}
+.progress-bar-bg {
+    height: 8px;
+    background: hsla(222, 47%, 30%, 1);
+    border-radius: 4px;
+    margin: 1rem 0;
+    overflow: hidden;
+}
+.progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(to right, var(--accent-blue), var(--accent-purple));
+    transition: width 0.3s ease;
+}
+
+/* Toast */
+.toast-container {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1000;
+}
+.toast {
+    background: var(--bg-card);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin-top: 0.5rem;
+    border-left: 4px solid var(--accent-blue);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+    animation: slideIn 0.3s ease forwards;
+}
+.toast.error { border-left-color: var(--color-accident); }
+.toast.success { border-left-color: var(--color-truck); }
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}

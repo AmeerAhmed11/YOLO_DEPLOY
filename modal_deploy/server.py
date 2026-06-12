@@ -23,7 +23,7 @@ image = (
     )
     # Upload the local TensorRT engine file to the container's /root/ directory
     # Note: We deploy from the root workspace directory, so relative path is correct.
-    .add_local_file("lightning_deploy/best.engine", remote_path="/root/best.engine")
+    .add_local_file("modal_deploy/best.engine", remote_path="/root/best.engine")
 )
 
 # Initialize the underlying FastAPI app

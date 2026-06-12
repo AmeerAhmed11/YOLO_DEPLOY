@@ -36,6 +36,6 @@ Once you are ready to deploy the serverless endpoint, run:
 ```bash
 bash deploy.sh
 ```
-*(Or simply run `lightning deploy server.py --cloud`)*
+*(Or simply run `lightning api deploy server.py --cloud`)*
 
 This command will package the app and give you a public URL that you can use to send requests to your YOLO model running on Lightning's GPUs!
